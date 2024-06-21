@@ -1,4 +1,7 @@
 {
+	"scripts": {
+		"train": "npx ts-node src/buildModel.ts"
+	},
 	"dependencies": {
 		"@tensorflow/tfjs-node": "^4.20.0",
 		"@tsconfig/node-lts": "^20.1.3",
