@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Tldraw, type Editor } from "tldraw";
-
+import * as tf from "@tensorflow/tfjs";
 import "tldraw/tldraw.css";
 import "./App.css";
 
@@ -9,6 +8,24 @@ type Tool = "draw" | "eraser";
 function App() {
   const [editor, setEditor] = useState<Editor | null>(null);
   const [selectedTool, setSelectedTool] = useState<Tool>("draw");
+  const [model, setModel] = useState<tf.LayersModel | null>(null);
+  const [isModelLoading, setIsModelLoading] = useState(false);
+  useEffect(() => {
+    if (model || isModelLoading) {
+      return;
+    }
+
+    setIsModelLoading(true);
+
+    async function loadModel() {
+      const loadedModel = await tf.loadLayersModel("/ahcd/model.json");
+      setIsModelLoading(false);
+      setModel(loadedModel);
+      console.log("Model loaded!");
+    }
+
+    loadModel();
+  }, [model, isModelLoading]);
 
   function toggleSelectedTool(forceDraw?: true) {
     let newTool: Tool = "draw";
