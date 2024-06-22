@@ -55,21 +55,23 @@ async function main() {
 
   const model = tf.sequential();
 
+  function conv2d(filters: number, kernelSize: [number, number]) {
+    return tf.layers.conv2d({
+      filters,
+      kernelSize,
+      activation: "relu",
+    });
+  }
+
   model.add(
     tf.layers.conv2d({
       inputShape: [32, 32, 1],
       filters: 32,
-      kernelSize: [3, 3],
+      kernelSize: [5, 5],
       activation: "relu",
     })
   );
-  model.add(
-    tf.layers.conv2d({
-      filters: 64,
-      kernelSize: [3, 3],
-      activation: "relu",
-    })
-  );
+  model.add(conv2d(32, [5, 5]));
   model.add(
     tf.layers.maxPooling2d({
       poolSize: [2, 2],
@@ -80,19 +82,29 @@ async function main() {
       rate: 0.25,
     })
   );
-  model.add(
-    tf.layers.conv2d({
-      filters: 64,
-      kernelSize: [3, 3],
-      activation: "relu",
-    })
-  );
+
+  model.add(conv2d(64, [3, 3]));
+  model.add(conv2d(64, [3, 3]));
   model.add(
     tf.layers.maxPooling2d({
       poolSize: [2, 2],
+      strides: [2, 2],
     })
   );
+  model.add(
+    tf.layers.dropout({
+      rate: 0.25,
+    })
+  );
+
   model.add(tf.layers.flatten());
+  model.add(
+    tf.layers.dense({
+      units: 256,
+      inputDim: 1024,
+      activation: "relu",
+    })
+  );
   model.add(
     tf.layers.dense({
       units: 256,
@@ -120,7 +132,7 @@ async function main() {
   console.log("👠 Commencing model training...");
 
   await model.fit(xs, ys, {
-    epochs: 10,
+    epochs: 20,
     shuffle: true,
     validationData: [testingData.xs, testingData.ys],
   });
