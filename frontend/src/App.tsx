@@ -13,7 +13,7 @@ function App() {
   const [selectedTool, setSelectedTool] = useState<Tool>("draw");
   const [model, setModel] = useState<tf.LayersModel | null>(null);
   const [isModelLoading, setIsModelLoading] = useState(false);
-  const [prediction, setPrediction] = useState<string | null>(null);
+  const [prediction, setPrediction] = useState<number | null>(null);
 
   useEffect(() => {
     if (model || isModelLoading) {
@@ -52,14 +52,14 @@ function App() {
     const processedPrediction = Array.from(prediction).map(Math.round);
 
     const letterIndex = processedPrediction.indexOf(1);
-
-    const predictedLetter =
-      letterIndex === -1
-        ? "Oops... couldn't identify that"
-        : ARABIC_CHARACTERS_AR[letterIndex - 1];
-
-    setPrediction(predictedLetter);
+    setPrediction(letterIndex);
   }
+
+  const hasPredictionError = prediction === -1;
+  const hasPrediction = prediction !== null && !hasPredictionError;
+  const predictedLetter = hasPrediction
+    ? ARABIC_CHARACTERS_AR[prediction - 1]
+    : null;
 
   function toggleSelectedTool(forceDraw?: true) {
     let newTool: Tool = "draw";
@@ -105,7 +105,10 @@ function App() {
         <button onClick={clearCanvas}>Clear</button>
         <button onClick={onSubmit}>Submit</button>
       </div>
-      <span className="prediction">{prediction}</span>
+      {predictedLetter && <span className="prediction">{predictedLetter}</span>}
+      {hasPredictionError && (
+        <span className="error">Oops, couldn't identify that. Try again?</span>
+      )}
     </>
   );
 }

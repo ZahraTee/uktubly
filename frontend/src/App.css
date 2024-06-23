@@ -17,7 +17,7 @@
 }
 
 .toolbar {
-  margin-top: 32px;
+  margin: 32px -8px;
 }
 
 .toolbar button {
