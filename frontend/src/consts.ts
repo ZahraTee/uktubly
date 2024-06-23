@@ -28,3 +28,6 @@ export const ARABIC_CHARACTERS_AR: Record<number, string> = {
   26: "و",
   27: "ي",
 };
+
+/** This is the width and height of the images the model is trained for */
+export const INPUT_IMAGE_SIZE = 32;

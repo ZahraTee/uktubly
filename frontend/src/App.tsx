@@ -1,15 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  Tldraw,
-  exportToBlob,
-  type Editor,
-  downsizeImage,
-  DefaultSizeStyle,
-} from "tldraw";
+import { useEffect, useState } from "react";
+import { Tldraw, type Editor, DefaultSizeStyle } from "tldraw";
 import * as tf from "@tensorflow/tfjs";
 import "tldraw/tldraw.css";
 import "./App.css";
-import { ARABIC_CHARACTERS_AR } from "./consts";
+import { ARABIC_CHARACTERS_AR, INPUT_IMAGE_SIZE } from "./consts";
+import { convertEditorContentsToModelInput } from "./imageProcessing";
 
 type Tool = "draw" | "eraser";
 
@@ -19,8 +14,6 @@ function App() {
   const [model, setModel] = useState<tf.LayersModel | null>(null);
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [prediction, setPrediction] = useState<string | null>(null);
-
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     if (model || isModelLoading) {
@@ -40,47 +33,18 @@ function App() {
   }, [model, isModelLoading]);
 
   async function onSubmit() {
-    const canvasContext = canvasRef.current?.getContext("2d");
-
-    if (!model || !editor || !canvasContext) {
+    if (!model || !editor) {
       return;
     }
 
-    const shapeIds = Array.from(editor.getCurrentPageShapeIds());
-
-    const blob = await exportToBlob({
-      editor,
-      ids: Array.from(shapeIds),
-      format: "png",
-      opts: {
-        darkMode: true,
-      },
-    });
-
-    const downsizedBlob = await downsizeImage(blob, 32, 32);
-    const imageBitmap = await createImageBitmap(downsizedBlob);
-
-    canvasContext.clearRect(0, 0, 32, 32);
-    canvasContext.save();
-    canvasContext.translate(32 / 2, 32 / 2);
-    canvasContext.rotate((270 * Math.PI) / 180);
-    canvasContext!.drawImage(imageBitmap, -32 / 2, -32 / 2, 32, 32);
-    const imageData = canvasContext!.getImageData(0, 0, 32, 32);
-    canvasContext.restore();
-    imageBitmap.close();
-
-    const pixels = imageData.data;
-
-    const grayscaleImageData = [];
-
-    for (let i = 0; i < pixels.length / 4; i += 1) {
-      const grayscaleValue = pixels[i * 4];
-      const thresholdedValue = grayscaleValue > 128 ? 255 : 0;
-      grayscaleImageData[i] = thresholdedValue;
-    }
+    const inputImageData = await convertEditorContentsToModelInput(editor);
 
     const inputTensor = tf
-      .tensor4d(grayscaleImageData, [1, 32, 32, 1], "float32")
+      .tensor4d(
+        inputImageData,
+        [1, INPUT_IMAGE_SIZE, INPUT_IMAGE_SIZE, 1],
+        "float32"
+      )
       .div(255);
 
     const outputTensor = model.predict(inputTensor) as tf.Tensor;
@@ -142,8 +106,6 @@ function App() {
         <button onClick={onSubmit}>Submit</button>
       </div>
       <span className="prediction">{prediction}</span>
-      {/* TODO: replace with OffscreenCanvas */}
-      <canvas ref={canvasRef} width={32} height={32} />
     </>
   );
 }
