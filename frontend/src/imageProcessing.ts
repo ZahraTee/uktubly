@@ -34,13 +34,25 @@ async function blobToRgbPixelData(blob: Blob): Promise<Uint8ClampedArray> {
 
   context.save();
   context.translate(32 / 2, 32 / 2);
+
+  // The pixel data in the dataset resolves to images that are flipped
+  // horizontally and rotated 90 deg counterclockwise, so we do that to
+  // the canvas image so the model can actually recognise things.
   context.rotate((270 * Math.PI) / 180);
+  context.scale(-1, 1);
+
   context.drawImage(imageBitmap, -32 / 2, -32 / 2, 32, 32);
   const imageData = context.getImageData(0, 0, 32, 32);
   context.restore();
   imageBitmap.close();
 
   return imageData.data;
+}
+
+export function grayscalePixelDataToImageData(pixelData: number[]): ImageData {
+  const rgbData = pixelData.flatMap((pixel) => [pixel, pixel, pixel, 255]);
+  const data = new Uint8ClampedArray(rgbData);
+  return new ImageData(data, 32, 32);
 }
 
 function processPixelData(rgbaPixels: Uint8ClampedArray): number[] {
