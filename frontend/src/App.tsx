@@ -38,7 +38,7 @@ function App() {
     loadModel();
   }, [model, isModelLoading]);
 
-  async function onSubmit() {
+  const onSubmit = async () => {
     if (!model || !editor) {
       return;
     }
@@ -56,24 +56,26 @@ function App() {
     const outputTensor = model.predict(inputTensor) as tf.Tensor;
     const prediction = await outputTensor.data();
     const processedPrediction = Array.from(prediction).map(Math.round);
-
     const letterIndex = processedPrediction.indexOf(1);
-    console.log(letterIndex);
-    setPrediction(letterIndex);
-    setAlreadySeen(seenLetters[letterIndex]);
+    const hasLetterBeenSeen = seenLetters[letterIndex];
 
-    if (!seenLetters[letterIndex] && letterIndex !== -1) {
-      setSeenLetters((prev) => {
-        const newSeenLetters = [...prev];
-        newSeenLetters.splice(letterIndex, 1, true);
-        return newSeenLetters;
-      });
+    setAlreadySeen(hasLetterBeenSeen);
+    setPrediction(letterIndex);
+
+    if (hasLetterBeenSeen || letterIndex === -1) {
+      return;
     }
-  }
+
+    setSeenLetters((prev) => {
+      const newSeenLetters = [...prev];
+      newSeenLetters.splice(letterIndex, 1, true);
+      return newSeenLetters;
+    });
+  };
 
   const hasPredictionError = prediction === -1;
 
-  function toggleSelectedTool(forceDraw?: true) {
+  const toggleSelectedTool = (forceDraw?: true) => {
     let newTool: Tool = "draw";
 
     if (selectedTool === "draw" && !forceDraw) {
@@ -82,9 +84,9 @@ function App() {
 
     setSelectedTool(newTool);
     editor?.setCurrentTool(newTool);
-  }
+  };
 
-  function clearCanvas() {
+  const clearCanvas = () => {
     const currentShapeIds = editor?.getCurrentPageShapeIds();
     const hasDrawing = currentShapeIds?.size ?? 0 > 0;
     if (currentShapeIds && hasDrawing) {
@@ -92,7 +94,7 @@ function App() {
       toggleSelectedTool(true);
     }
     setPrediction(null);
-  }
+  };
 
   return (
     <main>
