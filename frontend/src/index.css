@@ -1,16 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Rubik, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-color: #1b1b1b;
+  --text-color: #ffffffde;
+  --shadow-color: #111c;
+  --positive-color: #2c3a2f;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 a {
@@ -25,15 +31,16 @@ a:hover {
 body {
   margin: 0;
   place-items: center;
-  min-width: 320px;
+  min-width: 300px;
   min-height: 100vh;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.5em;
   line-height: 1.1;
-  font-weight: 600;
+  font-weight: 800;
   text-transform: lowercase;
+  letter-spacing: -0.025em;
 }
 
 button {
@@ -55,15 +62,111 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.canvas {
+  box-shadow: 0px 10px 20px 1px var(--shadow-color);
+  height: 300px;
+  width: 300px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.toolbar {
+  margin: 32px -8px;
+}
+
+.toolbar button {
+  margin: 0 8px;
+}
+
+.prediction {
+  font-size: 3em;
+}
+
+.action-area {
+  display: flex;
+  max-width: 700px;
+  margin: 3em auto;
+}
+
+.results-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  flex: 1;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 0.5em;
+  margin: 2em;
+  justify-content: center;
+
+  height: fit-content;
+  width: fit-content;
+  flex-wrap: wrap;
+}
+
+.tile {
+  font-size: 1.5em;
+  height: 3ch;
+  width: 3ch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3px 10px 0px var(--shadow-color);
+}
+
+@keyframes show-letter {
+  0% {
+    background-color: var(--bg-color);
+    color: transparent;
+  }
+  100% {
+    background-color: var(--positive-color);
+    color: var(--text-color);
+  }
+}
+
+.found {
+  background-color: var(--positive-color);
+  animation: show-letter 1s;
+}
+
+.hidden-error {
+  visibility: hidden;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --bg-color: #ffffff;
+    --text-color: #213547;
+    --shadow-color: #cccc;
+    --positive-color: #ecfdf0;
   }
   a:hover {
     color: #747bff;
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media (max-width: 700px) {
+  .action-area {
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5em;
+  }
+
+  .board {
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .found {
+    animation: none;
   }
 }

@@ -29,5 +29,8 @@ export const ARABIC_CHARACTERS_AR: Record<number, string> = {
   27: "ي",
 };
 
+export const ARABIC_CHARACTERS_COUNT =
+  Object.values(ARABIC_CHARACTERS_AR).length;
+
 /** This is the width and height of the images the model is trained for */
 export const INPUT_IMAGE_SIZE = 32;

@@ -4,30 +4,3 @@
   padding: 2rem;
   text-align: center;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-}
-
-.drawing-area {
-  box-shadow: 0px 10px 20px 1px #6663;
-  height: 320px;
-  width: 320px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.toolbar {
-  margin: 32px -8px;
-}
-
-.toolbar button {
-  margin: 0 8px;
-}
-
-canvas {
-  display: none;
-}
-
-.prediction {
-  font-size: 3em;
-}
