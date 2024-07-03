@@ -2,7 +2,6 @@ import * as tf from "@tensorflow/tfjs";
 import { useEffect, useState } from "react";
 import { DefaultSizeStyle, Tldraw, type Editor } from "tldraw";
 import "tldraw/tldraw.css";
-import "./App.css";
 import { LetterBoard } from "./components/LetterBoard";
 import { ARABIC_CHARACTERS_COUNT, INPUT_IMAGE_SIZE } from "./consts";
 import { convertEditorContentsToModelInput } from "./imageProcessing";
@@ -58,8 +57,8 @@ function App() {
     const prediction = await outputTensor.data();
     const processedPrediction = Array.from(prediction).map(Math.round);
 
-    // This is one-indexed.
     const letterIndex = processedPrediction.indexOf(1);
+    console.log(letterIndex);
     setPrediction(letterIndex);
     setAlreadySeen(seenLetters[letterIndex]);
 
