@@ -33,7 +33,7 @@ function fileDataToTensors(
   labels: FileRow[]
 ): { xs: tf.Tensor4D; ys: tf.Tensor } {
   const processedImages: number[][] = images.map((row) => row.map(Number));
-  const processedLabels: number[] = labels.map((row) => Number(row[0]));
+  const processedLabels: number[] = labels.map((row) => Number(row[0]) - 1);
 
   const exampleCount = images.length;
 
@@ -42,8 +42,7 @@ function fileDataToTensors(
       .tensor4d(processedImages.flat(), [exampleCount, 32, 32, 1], "float32")
       // Normalising the values, which are 0-255 representing grayscale values.
       .div(255),
-    // TODO: Use one hot encoding
-    ys: tf.tensor1d(processedLabels, "float32"),
+    ys: tf.oneHot(processedLabels, 28, 1, 0, "float32"),
   };
 }
 
@@ -125,7 +124,7 @@ async function main() {
 
   model.compile({
     optimizer: tf.train.adam(),
-    loss: "sparseCategoricalCrossentropy",
+    loss: "categoricalCrossentropy",
     metrics: ["accuracy"],
   });
 

@@ -61,12 +61,12 @@ function App() {
     // This is one-indexed.
     const letterIndex = processedPrediction.indexOf(1);
     setPrediction(letterIndex);
-    setAlreadySeen(seenLetters[letterIndex - 1]);
+    setAlreadySeen(seenLetters[letterIndex]);
 
-    if (!seenLetters[letterIndex - 1] && letterIndex !== -1) {
+    if (!seenLetters[letterIndex] && letterIndex !== -1) {
       setSeenLetters((prev) => {
         const newSeenLetters = [...prev];
-        newSeenLetters.splice(letterIndex - 1, 1, true);
+        newSeenLetters.splice(letterIndex, 1, true);
         return newSeenLetters;
       });
     }
@@ -98,7 +98,7 @@ function App() {
   return (
     <main>
       <h1>Uktubly</h1>
-      <p>✏️ Write me an Arabic letter...</p>
+      <p>✏️ Write an Arabic letter...</p>
       <div className="action-area">
         <div className="drawing-area">
           <div className="canvas">
