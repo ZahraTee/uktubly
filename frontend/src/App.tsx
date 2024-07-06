@@ -1,98 +1,36 @@
-import * as tf from "@tensorflow/tfjs";
-import { useEffect, useState } from "react";
-import { DefaultSizeStyle, Tldraw, type Editor } from "tldraw";
+import { useState } from "react";
 import "tldraw/tldraw.css";
 import { LetterBoard } from "./components/LetterBoard";
-import { ARABIC_CHARACTERS_COUNT, INPUT_IMAGE_SIZE } from "./consts";
-import { convertEditorContentsToModelInput } from "./imageProcessing";
-
-type Tool = "draw" | "eraser";
+import { ARABIC_CHARACTERS_COUNT } from "./consts";
+import { DrawingArea } from "./components/DrawingArea";
 
 function App() {
-  const [editor, setEditor] = useState<Editor | null>(null);
-  const [selectedTool, setSelectedTool] = useState<Tool>("draw");
-
-  const [model, setModel] = useState<tf.LayersModel | null>(null);
-  const [isModelLoading, setIsModelLoading] = useState(false);
-
   const [prediction, setPrediction] = useState<number | null>(null);
   const [alreadySeen, setAlreadySeen] = useState<boolean>(false);
   const [seenLetters, setSeenLetters] = useState<boolean[]>(
     new Array(ARABIC_CHARACTERS_COUNT).fill(false)
   );
 
-  useEffect(() => {
-    if (model || isModelLoading) {
-      return;
-    }
-
-    setIsModelLoading(true);
-
-    async function loadModel() {
-      const loadedModel = await tf.loadLayersModel("/ahcd/model.json");
-      setIsModelLoading(false);
-      setModel(loadedModel);
-      console.log("Model loaded!");
-    }
-
-    loadModel();
-  }, [model, isModelLoading]);
-
-  const onSubmit = async () => {
-    if (!model || !editor) {
-      return;
-    }
-
-    const inputImageData = await convertEditorContentsToModelInput(editor);
-
-    const inputTensor = tf
-      .tensor4d(
-        inputImageData,
-        [1, INPUT_IMAGE_SIZE, INPUT_IMAGE_SIZE, 1],
-        "float32"
-      )
-      .div(255);
-
-    const outputTensor = model.predict(inputTensor) as tf.Tensor;
-    const prediction = await outputTensor.data();
-    const processedPrediction = Array.from(prediction).map(Math.round);
-    const letterIndex = processedPrediction.indexOf(1);
-    const hasLetterBeenSeen = seenLetters[letterIndex];
+  const onSubmit = async (predictedIndex: number) => {
+    const hasLetterBeenSeen = seenLetters[predictedIndex];
 
     setAlreadySeen(hasLetterBeenSeen);
-    setPrediction(letterIndex);
+    setPrediction(predictedIndex);
 
-    if (hasLetterBeenSeen || letterIndex === -1) {
+    if (hasLetterBeenSeen || predictedIndex === -1) {
       return;
     }
 
     setSeenLetters((prev) => {
       const newSeenLetters = [...prev];
-      newSeenLetters.splice(letterIndex, 1, true);
+      newSeenLetters.splice(predictedIndex, 1, true);
       return newSeenLetters;
     });
   };
 
   const hasPredictionError = prediction === -1;
 
-  const toggleSelectedTool = (forceDraw?: true) => {
-    let newTool: Tool = "draw";
-
-    if (selectedTool === "draw" && !forceDraw) {
-      newTool = "eraser";
-    }
-
-    setSelectedTool(newTool);
-    editor?.setCurrentTool(newTool);
-  };
-
-  const clearCanvas = () => {
-    const currentShapeIds = editor?.getCurrentPageShapeIds();
-    const hasDrawing = currentShapeIds?.size ?? 0 > 0;
-    if (currentShapeIds && hasDrawing) {
-      editor?.deleteShapes(Array.from(currentShapeIds));
-      toggleSelectedTool(true);
-    }
+  const onClearCanvas = () => {
     setPrediction(null);
   };
 
@@ -101,27 +39,7 @@ function App() {
       <h1>Uktubly</h1>
       <p>✏️ Write an Arabic letter...</p>
       <div className="action-area">
-        <div className="drawing-area">
-          <div className="canvas">
-            <Tldraw
-              hideUi
-              inferDarkMode
-              onMount={(editor) => {
-                setEditor(editor);
-                editor.setCurrentTool(selectedTool);
-                // Set up a thick brush
-                editor.setStyleForNextShapes(DefaultSizeStyle, "xl");
-              }}
-            />{" "}
-          </div>
-          <div className="toolbar">
-            <button onClick={() => toggleSelectedTool()}>
-              {selectedTool === "draw" ? "Erase" : "Draw"}
-            </button>
-            <button onClick={clearCanvas}>Clear</button>
-            <button onClick={onSubmit}>Submit</button>
-          </div>
-        </div>
+        <DrawingArea onSubmit={onSubmit} onClear={onClearCanvas} />
 
         <div className="results-area">
           <LetterBoard seenStatus={seenLetters} />
