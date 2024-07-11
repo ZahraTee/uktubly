@@ -1,5 +1,7 @@
 # Uktubly
 
+![uktubly-demo](https://github.com/ZahraTee/uktubly/assets/5565340/245b700d-b4ea-46d3-9e1e-aa89c798f245)
+
 Uktubly is a web app for practicing writing Arabic letters. Its purpose is for me to gain hands-on experience with building models designed for practical Arabic handwriting recognition tasks and integrating them into a usable product, while also providing a fun tool to help friends and family with language learning.
 
 Why's it called "Uktubly"? That's a sound-alike for "write for me" in Arabic. :)
