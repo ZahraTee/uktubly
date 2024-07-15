@@ -1,13 +1,13 @@
 import "tldraw/tldraw.css";
 
 import { Header } from "./components/Header";
-import { FreeDrawView } from "./views/FreeDrawView";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Header />
-      <FreeDrawView />
+      <Outlet />
     </>
   );
 }
