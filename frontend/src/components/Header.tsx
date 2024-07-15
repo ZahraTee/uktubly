@@ -4,7 +4,7 @@ import { hasFeature } from "../utils/featureFlag";
 
 export function Header() {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 786px)");
   const isMenuVisible = !isMobile || isMenuToggled;
   const showMenuOptions = hasFeature("VITE_SHOW_MENU_OPTIONS");
 
