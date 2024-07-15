@@ -8,9 +8,18 @@ importers:
 
   .:
     dependencies:
+      react-confetti:
+        specifier: ^6.1.0
+        version: 6.1.0(react@18.3.1)
+      react-dom-confetti:
+        specifier: ^0.2.0
+        version: 0.2.0(react@18.3.1)
       react-router-dom:
         specifier: ^6.24.1
         version: 6.24.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      usehooks-ts:
+        specifier: ^3.1.0
+        version: 3.1.0(react@18.3.1)
 
 packages:
 
@@ -18,12 +27,29 @@ packages:
     resolution: {integrity: sha512-mCOMec4BKd6BRGBZeSnGiIgwsbLGp3yhVqAD8H+PxiRNEHgDpZb8J1TnrSDlg97t0ySKMQJTHCWBCmBpSmkF6Q==}
     engines: {node: '>=14.0.0'}
 
+  dom-confetti@0.2.2:
+    resolution: {integrity: sha512-+UVH9Y85qmpTnbmFURwLWjqLIykyIrsNSRkPX/eFlBuOURz9RDX8JoZHnajZHyFuCV0w/K3+tZK0ztfoTw6ejg==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
+
+  lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
+
+  react-confetti@6.1.0:
+    resolution: {integrity: sha512-7Ypx4vz0+g8ECVxr88W9zhcQpbeujJAVqL14ZnXJ3I23mOI9/oBVTQ3dkJhUmB0D6XOtCZEM6N0Gm9PMngkORw==}
+    engines: {node: '>=10.18'}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.1 || ^18.0.0
+
+  react-dom-confetti@0.2.0:
+    resolution: {integrity: sha512-+XRTi+WlCrcRN2dTjdEopOaPFtS7hpaHRRQ0sHiVRGqpchKz4QVh3i+6eLEEpNHYpN2VgPmhjvJ/vnjmUYhlIQ==}
+    peerDependencies:
+      react: '*'
 
   react-dom@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -50,15 +76,38 @@ packages:
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
+  tween-functions@1.2.0:
+    resolution: {integrity: sha512-PZBtLYcCLtEcjL14Fzb1gSxPBeL7nWvGhO5ZFPGqziCcr8uvHp0NDmdjBchp6KHL+tExcg0m3NISmKxhU394dA==}
+
+  usehooks-ts@3.1.0:
+    resolution: {integrity: sha512-bBIa7yUyPhE1BCc0GmR96VU/15l/9gP1Ch5mYdLcFBaFGQsdmXkvjV0TtOqW1yUd6VjIwDunm+flSciCQXujiw==}
+    engines: {node: '>=16.15.0'}
+    peerDependencies:
+      react: ^16.8.0  || ^17 || ^18
+
 snapshots:
 
   '@remix-run/router@1.17.1': {}
 
+  dom-confetti@0.2.2: {}
+
   js-tokens@4.0.0: {}
+
+  lodash.debounce@4.0.8: {}
 
   loose-envify@1.4.0:
     dependencies:
       js-tokens: 4.0.0
+
+  react-confetti@6.1.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      tween-functions: 1.2.0
+
+  react-dom-confetti@0.2.0(react@18.3.1):
+    dependencies:
+      dom-confetti: 0.2.2
+      react: 18.3.1
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
@@ -85,3 +134,10 @@ snapshots:
   scheduler@0.23.2:
     dependencies:
       loose-envify: 1.4.0
+
+  tween-functions@1.2.0: {}
+
+  usehooks-ts@3.1.0(react@18.3.1):
+    dependencies:
+      lodash.debounce: 4.0.8
+      react: 18.3.1

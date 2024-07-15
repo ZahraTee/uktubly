@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { useMediaQuery } from "../hooks/useMediaQuery";
+
+import { NavLink } from "react-router-dom";
+import { useMediaQuery } from "usehooks-ts";
+
 import { hasFeature } from "../utils/featureFlag";
 
 export function Header() {
@@ -25,7 +28,14 @@ export function Header() {
           {isMenuVisible && (
             <menu>
               <li>
-                <button>Free draw</button>
+                <NavLink
+                  className={({ isActive }: { isActive: boolean }) =>
+                    isActive ? "active" : ""
+                  }
+                  to="/freedraw"
+                >
+                  Free draw
+                </NavLink>
               </li>
             </menu>
           )}

@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Rubik, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -27,11 +31,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 main {
+  width: 100%;
   max-width: 1280px;
   padding: 2em;
+  flex: 1;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+
+.complete {
+  animation: fade-in 3s;
+  position: relative;
+  top: 25vh;
 }
 
 .root a {
@@ -76,10 +98,8 @@ button:focus-visible {
 }
 
 header {
-  box-sizing: border-box;
   width: 100%;
   background: var(--menu-color);
-  padding: 0.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -92,21 +112,33 @@ header h1 {
 
 menu {
   display: flex;
-  margin: 0;
   backdrop-filter: blur(10px);
+  align-items: center;
+  margin: 0;
 }
 
 menu li {
+  display: flex;
   list-style: none;
   width: fit-content;
 }
 
+.options button {
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+}
+
 menu .options {
-  margin: 0 -0.25em;
+  margin: 0 0.25em;
   display: flex;
 }
 
-menu .options button {
+menu li a {
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   margin: 0 0.25em;
 }
 
@@ -123,13 +155,6 @@ menu .options button {
     z-index: 250;
   }
 
-  .options > button {
-    background: none;
-    padding: 0.5em;
-    display: flex;
-    align-items: center;
-  }
-
   menu li {
     width: 100%;
   }
@@ -138,12 +163,27 @@ menu .options button {
     background: var(--menu-color);
   }
 
-  menu li button {
+  menu li a {
     width: 100%;
     background: none;
     margin: 0;
-    padding: 0.5em 0;
+    padding: 0.5em;
   }
+}
+
+header .options {
+  margin: 0 0.5em;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+header .options li {
+  margin: 0 0.25em;
+}
+
+header h1 {
+  margin: 0.5em;
 }
 
 .canvas {
@@ -264,12 +304,8 @@ menu .options button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .found {
+  .found,
+  .complete {
     animation: none;
   }
-}
-
-canvas {
-  border: 1px solid lightgrey;
-  transform: rotate(90deg) scaleY(-1);
 }
