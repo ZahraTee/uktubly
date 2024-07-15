@@ -1,4 +1,4 @@
-import { ARABIC_CHARACTERS_AR } from "../consts";
+import { ARABIC_CHARACTERS_AR } from "../utils/consts";
 
 const ARABIC_CHARS_ARR = Object.values(ARABIC_CHARACTERS_AR);
 
