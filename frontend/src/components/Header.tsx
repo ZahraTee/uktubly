@@ -36,6 +36,14 @@ export function Header() {
                 >
                   Free draw
                 </NavLink>
+                <NavLink
+                  className={({ isActive }: { isActive: boolean }) =>
+                    isActive ? "active" : ""
+                  }
+                  to="/quickdraw"
+                >
+                  Quick draw
+                </NavLink>
               </li>
             </menu>
           )}
