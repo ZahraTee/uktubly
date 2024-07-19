@@ -1,7 +1,0 @@
-{
-	"dependencies": {
-		"react-confetti": "^6.1.0",
-		"react-router-dom": "^6.24.1",
-		"usehooks-ts": "^3.1.0"
-	}
-}
