@@ -93,6 +93,9 @@ export function DrawingArea({
           onMount={(editor) => {
             setEditor(editor);
             editor.setCurrentTool(selectedTool);
+            editor.setCameraOptions({
+              wheelBehavior: "none",
+            });
             // Set up a thick brush
             editor.setStyleForNextShapes(DefaultSizeStyle, "xl");
           }}
