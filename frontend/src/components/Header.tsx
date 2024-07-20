@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "usehooks-ts";
 
 import { hasFeature } from "../utils/featureFlag";
+import { Logo } from "./Logo";
 
 export function Header() {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -13,7 +14,7 @@ export function Header() {
 
   return (
     <header>
-      <h1>Uktubly</h1>
+      <Logo />
       {showMenuOptions && (
         <div className="options">
           {isMobile && (
@@ -36,6 +37,8 @@ export function Header() {
                 >
                   Free draw
                 </NavLink>
+              </li>
+              <li>
                 <NavLink
                   className={({ isActive }: { isActive: boolean }) =>
                     isActive ? "active" : ""

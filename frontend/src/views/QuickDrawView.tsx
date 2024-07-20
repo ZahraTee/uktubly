@@ -45,14 +45,12 @@ export function QuickDrawView() {
 
 function InitialStep({ onStart }: { onStart: () => void }) {
   return (
-    <>
+    <div className="info">
       <h2>Quick draw</h2>
-      <p>
-        Write the letters of the Arabic alphabet as fast as you can! It's you
-        against the clock. ⏱️
-      </p>
+      <p>Write the letters of the Arabic alphabet as fast as you can!</p>
+      <p>It's you against the clock. ⏱️</p>
       <button onClick={onStart}>Yalla, let's do this!</button>
-    </>
+    </div>
   );
 }
 
