@@ -62,7 +62,7 @@ export function FreeDrawView() {
         <CompletedView onClickRestart={onRestart} />
       ) : (
         <>
-          <p>✏️ Write an Arabic letter...</p>
+          <p>Write an Arabic letter on the canvas below</p>
           <div className="action-area">
             <DrawingArea onSubmit={onSubmit} onClear={onClearCanvas} />
 
