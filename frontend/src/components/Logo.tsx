@@ -5,9 +5,9 @@ export function Logo() {
       role="img"
       xmlns="http://www.w3.org/2000/svg"
       direction="ltr"
-      width="488.81177309119965"
-      height="285.0528672100763"
-      viewBox="475.5941134544003 213.47356639496184 488.81177309119965 285.0528672100763"
+      width="490"
+      height="180"
+      viewBox="475.5941134544003 213.47356639496184 490 280"
       stroke-linecap="round"
       stroke-linejoin="round"
     >

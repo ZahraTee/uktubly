@@ -13,8 +13,15 @@ export function Header() {
   const showMenuOptions = hasFeature("VITE_SHOW_MENU_OPTIONS");
 
   return (
-    <header>
-      <Logo />
+    <header className={isMenuToggled ? "menu-open" : ""}>
+      <NavLink
+        className={({ isActive }: { isActive: boolean }) =>
+          isActive ? "active" : ""
+        }
+        to="/"
+      >
+        <Logo />
+      </NavLink>
       {showMenuOptions && (
         <div className="options">
           {isMobile && (

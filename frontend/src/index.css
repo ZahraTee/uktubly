@@ -115,14 +115,17 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 3em;
-  margin-top: 0.75em;
+  height: 6em;
+  padding: 1em 1em;
 }
 
-header .logo {
-  max-height: 115%;
-  margin: 0 0 0 1.25em;
-  color: var(--text-color);
+header a {
+  display: inline-block;
+  height: 100%;
+}
+
+header a .logo {
+  height: 100%;
   width: fit-content;
 }
 
@@ -130,7 +133,7 @@ menu {
   display: flex;
   align-items: center;
   margin: 0;
-  height: 100%;
+  height: 3em;
 }
 
 menu li {
@@ -153,10 +156,8 @@ menu li a.active {
   border-bottom: 3px solid var(--active-color);
 }
 
-.options button {
-  height: 32px;
-  width: 32px;
-  padding: 5px;
+.active .logo {
+  color: var(--active-color);
 }
 
 menu .options {
@@ -173,6 +174,12 @@ header .options {
 
 header .options li {
   margin: 0 0.25em;
+}
+
+header .options button {
+  height: 32px;
+  width: 32px;
+  padding: 5px;
 }
 
 header h1 {
@@ -270,12 +277,85 @@ header h1 {
   visibility: hidden;
 }
 
+.flex {
+  display: flex;
+  max-width: 100%;
+  height: fit-content;
+  align-items: center;
+  flex: 0;
+}
+
+.modes {
+  margin: 3em 1em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+}
+
+.mode {
+  background: var(--button-color);
+  display: flex;
+  border-bottom: 8px solid var(--shadow-color);
+  text-decoration: none;
+  max-width: 520px;
+  width: 100%;
+  text-align: left;
+  border-radius: 32px;
+  margin-bottom: 1.5em;
+  color: var(--text-color);
+}
+
+a.mode:hover {
+  color: var(--text-color);
+  background-color: var(--active-color);
+}
+
+.mode .text h2 {
+  margin: 0;
+}
+
+.mode .text p {
+  margin: 0.5em 0 0 0;
+}
+
+.mode .text {
+  display: flex;
+  flex-direction: column;
+  padding: 2em 2em 2em 0;
+  justify-content: center;
+}
+
+.mode .emoji {
+  font-size: 4em;
+  border-radius: 16px;
+  margin: 24px;
+  width: fit-content;
+  justify-content: center;
+  text-shadow: 10px var(--shadow-color);
+  display: flex;
+  align-items: center;
+}
+
+.intro {
+  height: fit-content;
+  text-wrap: balance;
+  padding: 2em 1em;
+  flex: 1;
+}
+
+.intro .logo {
+  max-width: 300px;
+}
+
 .info {
   background-color: #1d1d1d;
   width: fit-content;
   padding: 2em;
   margin: 0 auto;
   border-radius: 1em;
+  text-wrap: balance;
 }
 
 .info h2 {
@@ -328,7 +408,7 @@ header h1 {
     padding: 0;
     position: absolute;
     right: 0;
-    top: 4em;
+    top: 5em;
     z-index: 250;
     flex-direction: column;
   }
@@ -378,6 +458,44 @@ header h1 {
 
   .tile {
     font-size: 1.25em;
+  }
+
+  .flex {
+    flex-direction: column;
+  }
+
+  .mode {
+    margin-bottom: 1em;
+  }
+
+  .mode h2 {
+    font-size: 1.25em;
+  }
+
+  .intro {
+    flex: 0;
+    padding: 2em 0 1em 0;
+  }
+
+  .intro .logo {
+    max-height: 100px;
+  }
+
+  .modes {
+    margin: 0;
+  }
+
+  .mode .emoji {
+    font-size: 3em;
+    margin: 16px;
+  }
+
+  .mode .text {
+    padding: 1em 2em 1.5em 0;
+  }
+
+  .mode .text p {
+    font-size: 0.875em;
   }
 }
 

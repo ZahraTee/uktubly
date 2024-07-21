@@ -5,6 +5,7 @@ import App from "./App";
 import "./index.css";
 import { FreeDrawView } from "./views/FreeDrawView";
 import { QuickDrawView } from "./views/QuickDrawView";
+import { HomeView } from "./views/HomeView";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <FreeDrawView />,
+        element: <HomeView />,
       },
       {
         path: "/freedraw",
