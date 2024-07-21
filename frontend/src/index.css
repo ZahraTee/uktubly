@@ -358,6 +358,10 @@ a.mode:hover {
   text-wrap: balance;
 }
 
+.info button {
+  margin: 0.5em;
+}
+
 .info h2 {
   margin-top: 0;
 }

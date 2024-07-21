@@ -2,28 +2,50 @@ import { useCallback, useEffect, useState } from "react";
 import { DrawingArea } from "../components/DrawingArea";
 import { LetterBoard } from "../components/LetterBoard";
 import { ARABIC_CHARACTERS_COUNT } from "../utils/consts";
-import { useInterval } from "usehooks-ts";
+import { useInterval, useLocalStorage } from "usehooks-ts";
+
+const PERSONAL_BEST_KEY = "uktubly:quickdraw:personalbest";
 
 export function QuickDrawView() {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [finishTime, setFinishTime] = useState<number | null>(null);
   const [showCompletionStep, setShowCompletionStep] = useState(false);
 
+  const [isNewPersonalBest, setIsNewPersonalBest] = useState(false);
+  const [personalBestStr, setPersonalBestStr] = useLocalStorage(
+    PERSONAL_BEST_KEY,
+    ""
+  );
+
+  const personalBest: number | null =
+    personalBestStr !== "" ? parseInt(personalBestStr, 10) : null;
+
+  console.log("pb", personalBestStr, personalBest);
+
   const onStart = useCallback(() => {
     setStartTime(Date.now());
   }, []);
 
   const onFinish = useCallback(() => {
-    setFinishTime(Date.now());
+    const currentFinishTime = Date.now();
+    setFinishTime(currentFinishTime);
+
+    const timeElapsed = currentFinishTime - (startTime ?? 0);
+
+    if (timeElapsed <= (personalBest ?? timeElapsed)) {
+      setPersonalBestStr(timeElapsed.toString());
+      setIsNewPersonalBest(true);
+    }
 
     setTimeout(() => {
       setShowCompletionStep(true);
     }, 1000);
-  }, []);
+  }, [personalBest, setPersonalBestStr, startTime]);
 
   const onRestart = useCallback(() => {
     setFinishTime(null);
     setStartTime(Date.now());
+    setIsNewPersonalBest(false);
   }, []);
 
   return (
@@ -37,6 +59,8 @@ export function QuickDrawView() {
           startTime={startTime}
           finishTime={finishTime}
           onRestart={onRestart}
+          personalBest={personalBest}
+          isNewPersonalBest={isNewPersonalBest}
         />
       )}
     </main>
@@ -131,19 +155,43 @@ function GameStep({
 function CompletionStep({
   startTime,
   finishTime,
+  personalBest,
+  isNewPersonalBest,
   onRestart,
 }: {
   startTime: number;
   finishTime: number;
+  personalBest: number | null;
+  isNewPersonalBest: boolean;
   onRestart: () => void;
 }) {
-  const timeTakenSecs = ((finishTime - startTime) / 1000).toFixed(3);
-  return (
-    <div className="complete">
-      <h2>You did it!</h2>
-      <p>You took {timeTakenSecs} seconds!</p>
-      <p>Want to see if you can beat your time?</p>
+  const hasNavigatorSharing = typeof navigator.share === "function";
+  const timeTakenSecs = ((finishTime - startTime) / 1000).toFixed(2);
 
+  const shareData = {
+    title: "Uktubly - The Arabic alphabet game augmented with AI!",
+    text: `I got all the letters in ${timeTakenSecs} seconds! Can you beat my time?`,
+    url: "https://uktubly.zahra.dev/quickdraw",
+  };
+
+  const pbSecs = personalBest
+    ? (personalBest / 1000).toFixed(2)
+    : timeTakenSecs;
+  return (
+    <div className="complete info">
+      <h2>You did it!</h2>
+      <p>
+        You took {timeTakenSecs} seconds!{" "}
+        {isNewPersonalBest
+          ? "That's a new personal best!"
+          : `Your personal best is ${pbSecs}s.`}
+      </p>
+      <p>Want to see if you can beat your time?</p>
+      {hasNavigatorSharing ? (
+        <button onClick={() => navigator.share(shareData)}>
+          Share your time
+        </button>
+      ) : null}
       <button onClick={onRestart}>Aywaaa, let's go!</button>
     </div>
   );
