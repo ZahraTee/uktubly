@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import { SettingsContextProvider } from "./utils/SettingsContextProvider";
-import { GuidedDrawView } from "./views/GuidedDrawView";
+
 import { FreeDrawView } from "./views/FreeDrawView";
+import { GuidedDrawView } from "./views/GuidedDrawView";
 import { HomeView } from "./views/HomeView";
 import { QuickDrawView } from "./views/QuickDrawView";
+
+import { EditorContextProvider } from "./utils/EditorContextProvider";
+import { SettingsContextProvider } from "./utils/SettingsContextProvider";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +40,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <SettingsContextProvider>
-      <RouterProvider router={router} />
+      <EditorContextProvider>
+        <RouterProvider router={router} />
+      </EditorContextProvider>
     </SettingsContextProvider>
   </React.StrictMode>
 );

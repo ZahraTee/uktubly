@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "../components/Button";
 import { DrawingArea } from "../components/DrawingArea";
 import { LetterBoard } from "../components/LetterBoard";
 import { ARABIC_CHARACTERS_EN, ARABIC_CHARACTERS_COUNT } from "../utils/consts";
 import { useSuccessSound } from "../utils/sounds";
+import { useEditor } from "../utils/EditorContextProvider";
 
 export function GuidedDrawView() {
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
@@ -57,14 +58,19 @@ function DrawingView({
 
   const [hasPredictionError, setHasPredictionError] = useState(false);
 
+  const { clear: clearCanvas } = useEditor();
+
   const onSubmit = async (predictedIndex: number) => {
     if (predictedIndex !== currentLetterIndex) {
       setHasPredictionError(true);
     } else {
+      setHasPredictionError(false);
       playSuccessSound();
+      clearCanvas();
       onNextLetter();
     }
   };
+
   const onClearCanvas = () => {
     setHasPredictionError(false);
   };
@@ -75,13 +81,32 @@ function DrawingView({
       ? "an"
       : "a";
 
+  const [areGuidesEnabled, setAreGuidesEnabled] = useState(false);
+
+  const toggleGuides = () => {
+    if (areGuidesEnabled) {
+      clearCanvas();
+      setAreGuidesEnabled(false);
+    } else {
+      setAreGuidesEnabled(true);
+    }
+  };
+
   return (
     <>
       <p>
         Write me {indefiniteArticle} {ARABIC_CHARACTERS_EN[currentLetterIndex]}
       </p>
+
+      <button onClick={toggleGuides}>
+        {areGuidesEnabled ? "Hide" : "Show"} letter guide
+      </button>
       <div className="action-area">
-        <DrawingArea onSubmit={onSubmit} onClear={onClearCanvas} />
+        <DrawingArea
+          onSubmit={onSubmit}
+          onClear={onClearCanvas}
+          guideLetterIndex={areGuidesEnabled ? currentLetterIndex : undefined}
+        />
 
         <div className="results-area">
           <LetterBoard seenStatus={seenLetters} />

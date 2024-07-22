@@ -1,9 +1,13 @@
 import * as tf from "@tensorflow/tfjs";
 
 import { useEffect, useState } from "react";
-import { DefaultSizeStyle, Tldraw, type Editor } from "tldraw";
+import { DefaultSizeStyle, Tldraw } from "tldraw";
+
 import { ARABIC_CHARACTERS_AR, INPUT_IMAGE_SIZE } from "../utils/consts";
+import { useEditor } from "../utils/EditorContextProvider";
+import letterGuides from "../utils/guides.json";
 import { convertEditorContentsToModelInput } from "../utils/imageProcessing";
+
 import { Button } from "./Button";
 
 type PredictedIndex = keyof typeof ARABIC_CHARACTERS_AR;
@@ -11,15 +15,18 @@ type PredictedIndex = keyof typeof ARABIC_CHARACTERS_AR;
 interface Props {
   onClear: () => void;
   onSubmit: (predictedIndex: PredictedIndex) => void;
+  guideLetterIndex?: number;
 }
 
 export function DrawingArea({
   onClear: postClear,
   onSubmit: postSubmit,
+  guideLetterIndex,
 }: Props) {
   type Tool = "draw" | "eraser";
 
-  const [editor, setEditor] = useState<Editor | null>(null);
+  const { editor, setEditor } = useEditor();
+
   const [selectedTool, setSelectedTool] = useState<Tool>("draw");
 
   const [model, setModel] = useState<tf.LayersModel | null>(null);
@@ -41,6 +48,22 @@ export function DrawingArea({
 
     loadModel();
   }, [model, isModelLoading]);
+
+  useEffect(() => {
+    if (!editor || guideLetterIndex === undefined) {
+      return;
+    }
+
+    async function superimposeGuide() {
+      await editor!.putExternalContent({
+        text: letterGuides[guideLetterIndex!],
+        type: "svg-text",
+      });
+      console.log("SUPERIMPOSED");
+    }
+
+    superimposeGuide();
+  }, [editor, guideLetterIndex]);
 
   const toggleSelectedTool = (forceDraw?: true) => {
     let newTool: Tool = "draw";
