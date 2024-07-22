@@ -2,6 +2,7 @@ import * as tf from "@tensorflow/tfjs";
 
 import { useEffect, useState } from "react";
 import { DefaultSizeStyle, Tldraw } from "tldraw";
+import { useMediaQuery } from "usehooks-ts";
 
 import { ARABIC_CHARACTERS_AR, INPUT_IMAGE_SIZE } from "../utils/consts";
 import { useEditor } from "../utils/EditorContextProvider";
@@ -49,21 +50,28 @@ export function DrawingArea({
     loadModel();
   }, [model, isModelLoading]);
 
+  const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
   useEffect(() => {
     if (!editor || guideLetterIndex === undefined) {
       return;
     }
 
     async function superimposeGuide() {
+      let svgText = letterGuides[guideLetterIndex!];
+
+      if (isDarkMode) {
+        svgText = svgText.replaceAll("#000", "#fff");
+      }
+
       await editor!.putExternalContent({
-        text: letterGuides[guideLetterIndex!],
+        text: svgText,
         type: "svg-text",
       });
-      console.log("SUPERIMPOSED");
     }
 
     superimposeGuide();
-  }, [editor, guideLetterIndex]);
+  }, [editor, guideLetterIndex, isDarkMode]);
 
   const toggleSelectedTool = (forceDraw?: true) => {
     let newTool: Tool = "draw";
