@@ -19,7 +19,7 @@
   --text-color: #dfe3ff;
   --shadow-color: #c67ed4;
   --positive-color: #2c3a2f;
-  --active-color: #ca6ea7;
+  --active-color: #934b9f;
 }
 
 :dir(rtl) {
@@ -373,6 +373,7 @@ a.mode:hover {
     --bg-color: #dfe3ff;
     --button-color: #e6cdef;
     --text-color: #1d082c;
+    --active-color: #c39bd5;
     --shadow-color: #1d082c;
     --positive-color: #ecfdf0;
   }
