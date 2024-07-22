@@ -94,8 +94,9 @@ button {
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 425;
+  font-weight: 450;
   font-family: inherit;
+  color: var(--text-color);
   background-color: var(--button-color);
   cursor: pointer;
   transition: border-color 0.25s;
@@ -112,9 +113,6 @@ button:focus-visible {
 
 header {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 6em;
   padding: 1em 1em;
 }
@@ -125,8 +123,13 @@ header a {
 }
 
 header a .logo {
+  color: var(--text-color);
   height: 100%;
   width: fit-content;
+}
+
+header a .logo:hover {
+  color: var(--active-color);
 }
 
 menu {
@@ -279,7 +282,6 @@ header h1 {
 
 .flex {
   display: flex;
-  max-width: 100%;
   height: fit-content;
   align-items: center;
   flex: 0;
