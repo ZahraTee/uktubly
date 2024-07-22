@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import "./index.css";
+import { SettingsContextProvider } from "./utils/SettingsContextProvider";
 import { FreeDrawView } from "./views/FreeDrawView";
-import { QuickDrawView } from "./views/QuickDrawView";
 import { HomeView } from "./views/HomeView";
+import { QuickDrawView } from "./views/QuickDrawView";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <SettingsContextProvider>
+      <RouterProvider router={router} />
+    </SettingsContextProvider>
   </React.StrictMode>
 );

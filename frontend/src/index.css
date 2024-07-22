@@ -102,6 +102,11 @@ button {
   transition: border-color 0.25s;
 }
 
+button svg {
+  height: 32px;
+  width: 32px;
+}
+
 button:hover {
   background-color: var(--active-color);
 }
@@ -115,6 +120,8 @@ header {
   width: 100%;
   height: 6em;
   padding: 1em 1em;
+  display: flex;
+  justify-content: space-between;
 }
 
 header a {
@@ -182,7 +189,7 @@ header .options li {
 header .options button {
   height: 32px;
   width: 32px;
-  padding: 5px;
+  padding: 0px;
 }
 
 header h1 {
@@ -494,7 +501,7 @@ a.mode:hover {
 
   .mode .emoji {
     font-size: 3em;
-    margin: 16px;
+    margin: 0.5em;
   }
 
   .mode .text {
@@ -511,4 +518,14 @@ a.mode:hover {
   .complete {
     animation: none;
   }
+}
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }

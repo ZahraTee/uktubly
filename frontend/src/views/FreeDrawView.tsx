@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import { useWindowSize } from "usehooks-ts";
 
+import { Button } from "../components/Button";
 import { DrawingArea } from "../components/DrawingArea";
 import { LetterBoard } from "../components/LetterBoard";
 import { ARABIC_CHARACTERS_COUNT } from "../utils/consts";
+import { useSuccessSound } from "../utils/sounds";
 
 export function FreeDrawView() {
   const [prediction, setPrediction] = useState<number | null>(null);
@@ -13,10 +15,11 @@ export function FreeDrawView() {
   const [seenLetters, setSeenLetters] = useState<boolean[]>(
     new Array(ARABIC_CHARACTERS_COUNT).fill(false)
   );
+  const [isComplete, setIsComplete] = useState(false);
 
   const areAllLettersSeen = seenLetters.every((seen) => seen);
 
-  const [isComplete, setIsComplete] = useState(false);
+  const playSuccessSound = useSuccessSound();
 
   useEffect(() => {
     if (!areAllLettersSeen) {
@@ -37,6 +40,8 @@ export function FreeDrawView() {
     if (hasLetterBeenSeen || predictedIndex === -1) {
       return;
     }
+
+    playSuccessSound();
 
     setSeenLetters((prev) => {
       const newSeenLetters = [...prev];
@@ -100,7 +105,7 @@ function CompletedView({ onClickRestart }: { onClickRestart: () => void }) {
         <span>🎉</span>
         <h2>You did it!</h2>
         <p>Look at you, acing the abjad. Want to give it another go?</p>
-        <button onClick={onClickRestart}>Play again</button>
+        <Button onClick={onClickRestart}>Play again</Button>
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { DefaultSizeStyle, Tldraw, type Editor } from "tldraw";
 import { ARABIC_CHARACTERS_AR, INPUT_IMAGE_SIZE } from "../utils/consts";
 import { convertEditorContentsToModelInput } from "../utils/imageProcessing";
+import { Button } from "./Button";
 
 type PredictedIndex = keyof typeof ARABIC_CHARACTERS_AR;
 
@@ -102,7 +103,7 @@ export function DrawingArea({
         />
       </div>
       <div className="toolbar">
-        <button onClick={() => toggleSelectedTool()}>
+        <Button onClick={() => toggleSelectedTool()}>
           {selectedTool === "draw" ? (
             <>
               <span>Erase</span>
@@ -112,9 +113,9 @@ export function DrawingArea({
               <span>Draw</span>
             </>
           )}
-        </button>
-        <button onClick={onClear}>Clear</button>
-        <button onClick={onSubmit}>Submit</button>
+        </Button>
+        <Button onClick={onClear}>Clear</Button>
+        <Button onClick={onSubmit}>Submit</Button>
       </div>
     </div>
   );

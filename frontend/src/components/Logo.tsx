@@ -5,7 +5,7 @@ export function Logo() {
       role="img"
       xmlns="http://www.w3.org/2000/svg"
       direction="ltr"
-      width="490"
+      width="280"
       height="180"
       viewBox="475.5941134544003 213.47356639496184 490 280"
       stroke-linecap="round"

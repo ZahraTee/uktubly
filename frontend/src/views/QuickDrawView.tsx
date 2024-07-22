@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
+import { useInterval, useLocalStorage } from "usehooks-ts";
+
+import { Button } from "../components/Button";
 import { DrawingArea } from "../components/DrawingArea";
 import { LetterBoard } from "../components/LetterBoard";
 import { ARABIC_CHARACTERS_COUNT } from "../utils/consts";
-import { useInterval, useLocalStorage } from "usehooks-ts";
+import { useSuccessSound } from "../utils/sounds";
 
 const PERSONAL_BEST_KEY = "uktubly:quickdraw:personalbest";
 
@@ -19,8 +22,6 @@ export function QuickDrawView() {
 
   const personalBest: number | null =
     personalBestStr !== "" ? parseInt(personalBestStr, 10) : null;
-
-  console.log("pb", personalBestStr, personalBest);
 
   const onStart = useCallback(() => {
     setStartTime(Date.now());
@@ -73,7 +74,7 @@ function InitialStep({ onStart }: { onStart: () => void }) {
       <h2>Quick draw</h2>
       <p>Write the letters of the Arabic alphabet as fast as you can!</p>
       <p>It's you against the clock. ⏱️</p>
-      <button onClick={onStart}>Yalla, let's do this!</button>
+      <Button onClick={onStart}>Yalla, let's do this!</Button>
     </div>
   );
 }
@@ -98,6 +99,8 @@ function GameStep({
 
   const areAllLettersSeen = seenLetters.every((seen) => seen);
 
+  const playSuccessSound = useSuccessSound();
+
   const onSubmit = async (predictedIndex: number) => {
     const hasLetterBeenSeen = seenLetters[predictedIndex];
 
@@ -107,6 +110,8 @@ function GameStep({
     if (hasLetterBeenSeen || predictedIndex === -1) {
       return;
     }
+
+    playSuccessSound();
 
     setSeenLetters((prev) => {
       const newSeenLetters = [...prev];
@@ -188,11 +193,11 @@ function CompletionStep({
       </p>
       <p>Want to see if you can beat your time?</p>
       {hasNavigatorSharing ? (
-        <button onClick={() => navigator.share(shareData)}>
+        <Button onClick={() => navigator.share(shareData)}>
           Share your time
-        </button>
+        </Button>
       ) : null}
-      <button onClick={onRestart}>Aywaaa, let's go!</button>
+      <Button onClick={onRestart}>Aywaaa, let's go!</Button>
     </div>
   );
 }
