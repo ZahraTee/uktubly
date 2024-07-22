@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import { useInterval, useLocalStorage } from "usehooks-ts";
+
+import Confetti from "react-confetti";
+import { useWindowSize, useInterval, useLocalStorage } from "usehooks-ts";
 
 import { Button } from "../components/Button";
 import { DrawingArea } from "../components/DrawingArea";
@@ -170,6 +172,8 @@ function CompletionStep({
   isNewPersonalBest: boolean;
   onRestart: () => void;
 }) {
+  const { width, height } = useWindowSize();
+
   const hasNavigatorSharing = typeof navigator.share === "function";
   const timeTakenSecs = ((finishTime - startTime) / 1000).toFixed(2);
 
@@ -182,22 +186,33 @@ function CompletionStep({
   const pbSecs = personalBest
     ? (personalBest / 1000).toFixed(2)
     : timeTakenSecs;
+
   return (
-    <div className="complete info">
-      <h2>You did it!</h2>
-      <p>
-        You took {timeTakenSecs} seconds!{" "}
-        {isNewPersonalBest
-          ? "That's a new personal best!"
-          : `Your personal best is ${pbSecs}s.`}
-      </p>
-      <p>Want to see if you can beat your time?</p>
-      {hasNavigatorSharing ? (
-        <Button onClick={() => navigator.share(shareData)}>
-          Share your time
-        </Button>
-      ) : null}
-      <Button onClick={onRestart}>Aywaaa, let's go!</Button>
-    </div>
+    <>
+      {isNewPersonalBest && (
+        <Confetti
+          width={width}
+          height={height}
+          numberOfPieces={1000}
+          recycle={false}
+        />
+      )}
+      <div className="complete info">
+        <h2>You did it!</h2>
+        <p>
+          You took {timeTakenSecs} seconds!{" "}
+          {isNewPersonalBest
+            ? "That's a new personal best!"
+            : `Your personal best is ${pbSecs}s.`}
+        </p>
+        <p>Want to see if you can beat your time?</p>
+        {hasNavigatorSharing ? (
+          <Button onClick={() => navigator.share(shareData)}>
+            Share your time
+          </Button>
+        ) : null}
+        <Button onClick={onRestart}>Aywaaa, let's go!</Button>
+      </div>
+    </>
   );
 }

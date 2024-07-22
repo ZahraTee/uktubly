@@ -45,7 +45,7 @@
 main {
   width: 100%;
   max-width: 1280px;
-  padding: 2em;
+  padding: 0 2em;
   flex: 1;
 }
 
@@ -60,8 +60,6 @@ main {
 
 .complete {
   animation: fade-in 3s;
-  position: relative;
-  top: 25vh;
 }
 
 .root a {
@@ -231,6 +229,10 @@ header h1 {
   margin: 3em auto;
 }
 
+.drawing-area {
+  margin-top: 1em;
+}
+
 .results-area {
   display: flex;
   flex-direction: column;
@@ -362,9 +364,10 @@ a.mode:hover {
   background-color: #1d1d1d;
   width: fit-content;
   padding: 2em;
-  margin: 0 auto;
+  margin: 3em auto 0 auto;
   border-radius: 1em;
   text-wrap: balance;
+  min-width: 480px;
 }
 
 .info button {
@@ -406,10 +409,6 @@ a.mode:hover {
 }
 
 @media (max-width: 786px) {
-  main {
-    padding: 0.5em 2em;
-  }
-
   .canvas {
     height: 240px;
     width: 240px;
