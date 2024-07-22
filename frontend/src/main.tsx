@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import { SettingsContextProvider } from "./utils/SettingsContextProvider";
+import { GuidedDrawView } from "./views/GuidedDrawView";
 import { FreeDrawView } from "./views/FreeDrawView";
 import { HomeView } from "./views/HomeView";
 import { QuickDrawView } from "./views/QuickDrawView";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/quickdraw",
         element: <QuickDrawView />,
+      },
+      {
+        path: "/guideddraw",
+        element: <GuidedDrawView />,
       },
     ],
   },

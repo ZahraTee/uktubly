@@ -31,6 +31,37 @@ export const ARABIC_CHARACTERS_AR: Record<number, string> = {
   27: "ي",
 };
 
+export const ARABIC_CHARACTERS_EN: Record<number, string> = {
+  0: "alif",
+  1: "ba'",
+  2: "ta'",
+  3: "tha'",
+  4: "jeem",
+  5: "ḥa'",
+  6: "kha'",
+  7: "daal",
+  8: "thaal",
+  9: "ra'",
+  10: "zay",
+  11: "seen",
+  12: "sheen",
+  13: "ṣaad",
+  14: "ḍaad",
+  15: "ṭa'",
+  16: "dha'",
+  17: "^ayn",
+  18: "ghayn",
+  19: "fa'",
+  20: "qaf",
+  21: "kaf",
+  22: "lam",
+  23: "meem",
+  24: "noon",
+  25: "ha'",
+  26: "waw",
+  27: "ya'",
+};
+
 export const ARABIC_CHARACTERS_COUNT =
   Object.values(ARABIC_CHARACTERS_AR).length;
 
@@ -51,7 +82,7 @@ export const MODES: Mode[] = [
           emoji: "🤝",
           description:
             "Still learning? Draw the letter you're asked for (with an extra helping hand if needed!)",
-          path: "/quickdraw",
+          path: "/guideddraw",
         },
       ]
     : []),
