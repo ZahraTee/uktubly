@@ -1,6 +1,8 @@
 # Uktubly
 
-![uktubly-demo](https://github.com/ZahraTee/uktubly/assets/5565340/245b700d-b4ea-46d3-9e1e-aa89c798f245)
+|                                          |                                                      |
+| ---------------------------------------- | ---------------------------------------------------- |
+| ![Screenshot of home screen](./home.png) | ![Screenshot of Guided Draw view](./guided-draw.png) |
 
 Uktubly is a web app for practicing writing Arabic letters. Its purpose is for me to gain hands-on experience with building models designed for practical Arabic handwriting recognition tasks and integrating them into a usable product, while also providing a fun tool to help friends and family with language learning.
 
@@ -24,4 +26,9 @@ To run the frontend:
 
 ## Status
 
-This is a work in progress! The current iteration of the model recognises most letters pretty well. At the moment the application only recognises standalone versions of letters and supports a single, simple game mode. Lots of room for improvements.
+This is a work in progress! The current iteration of the model recognises most letters pretty well. At the moment the application only recognises standalone versions of letters.
+
+### Planned features and improvements
+
+- Addition of starting, medial and ending letter forms.
+- Addition of numbers.
