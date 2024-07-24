@@ -75,7 +75,11 @@ function DrawingView({
     setHasPredictionError(false);
   };
 
-  const transliteratedLetter = ARABIC_CHARACTERS_EN[currentLetterIndex];
+  const transliteratedLetter =
+    currentLetterIndex < ARABIC_CHARACTERS_COUNT
+      ? ARABIC_CHARACTERS_EN[currentLetterIndex]
+      : "";
+
   const indefiniteArticle =
     transliteratedLetter.startsWith("a") || transliteratedLetter.startsWith("^")
       ? "an"
