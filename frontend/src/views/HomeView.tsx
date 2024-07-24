@@ -7,7 +7,9 @@ export function HomeView() {
     <main className="flex">
       <div className="intro">
         <Logo />
-        <p>Augment your Arabic alphabet acquisition with AI</p>
+        <p>
+          Accelerate your Arabic alphabet acquisition with an AI-augmented game!
+        </p>
       </div>
       <div className="modes">
         {MODES.map((mode) => (

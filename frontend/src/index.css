@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
 :root {
-  font-family: IBM Plex Sans, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Pangolin", cursive;
   line-height: 1.5;
-  font-weight: 425;
+  font-weight: 400;
   color-scheme: light dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,7 +23,8 @@
   --active-color: #934b9f;
 }
 
-:dir(rtl) {
+:dir(rtl),
+.ar {
   font-family: IBM Plex Sans Arabic, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
 }
@@ -69,7 +71,7 @@ main {
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--active-color);
 }
 
 body {
@@ -77,14 +79,6 @@ body {
   place-items: center;
   min-width: 300px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 1.5em;
-  line-height: 1.1;
-  font-weight: 800;
-  text-transform: lowercase;
-  letter-spacing: -0.025em;
 }
 
 button {
@@ -364,7 +358,7 @@ a.mode:hover {
   background-color: #1d1d1d;
   width: fit-content;
   padding: 2em;
-  margin: 3em auto 0 auto;
+  margin: 3em auto 6em;
   border-radius: 1em;
   text-wrap: balance;
   min-width: 480px;
@@ -389,6 +383,7 @@ a.mode:hover {
   }
 
   #root {
+    font-weight: 425;
     background-image: url("/shapes-dark.svg");
     background-blend-mode: darken;
   }
@@ -465,6 +460,10 @@ a.mode:hover {
     margin: 1em;
   }
 
+  .toolbar button {
+    max-width: 20vw;
+  }
+
   .board {
     margin: 0;
   }
@@ -510,6 +509,10 @@ a.mode:hover {
   .mode .text p {
     font-size: 0.875em;
   }
+
+  .info {
+    min-width: 300px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -527,4 +530,24 @@ a.mode:hover {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+.about {
+  text-align: left;
+  max-width: 65ch;
+  text-wrap: unset;
+  font-weight: 400;
+}
+
+.about h2 {
+  font-size: 1.125em;
+}
+
+details {
+  background: var(--button-color);
+  padding: 1em 1em 0 1em;
+}
+
+details summary {
+  margin-bottom: 1em;
 }
