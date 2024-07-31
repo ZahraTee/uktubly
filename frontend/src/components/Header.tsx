@@ -22,19 +22,12 @@ export function Header() {
       <div className="options">
         <Button
           onClick={() => toggleSound(!isSoundEnabled)}
-          enableSound={!isSoundEnabled}
+          forceSoundEnabled={!isSoundEnabled}
         >
-          {isSoundEnabled ? (
-            <>
-              <SoundOff />
-              <span className="sr-only">Mute sound</span>
-            </>
-          ) : (
-            <>
-              <SoundOn />
-              <span className="sr-only">Unmute sound</span>
-            </>
-          )}
+          {isSoundEnabled ? <SoundOff /> : <SoundOn />}
+          <span className="sr-only">
+            {isSoundEnabled ? "Mute" : "Unmute"} sound
+          </span>
         </Button>
       </div>
     </header>
