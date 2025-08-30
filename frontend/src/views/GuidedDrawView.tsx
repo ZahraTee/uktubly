@@ -11,7 +11,7 @@ export function GuidedDrawView() {
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
 
   const [seenLetters, setSeenLetters] = useState<boolean[]>(
-    new Array(ARABIC_CHARACTERS_COUNT).fill(false)
+    new Array(ARABIC_CHARACTERS_COUNT).fill(false),
   );
 
   const isComplete = seenLetters.every((seen) => seen);
@@ -98,7 +98,7 @@ function DrawingView({
 
   return (
     <>
-      <p>
+      <p className="instruction">
         Write me {indefiniteArticle} {ARABIC_CHARACTERS_EN[currentLetterIndex]}
       </p>
 

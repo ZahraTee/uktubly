@@ -101,7 +101,7 @@ function CompletedView({ onClickRestart }: { onClickRestart: () => void }) {
         numberOfPieces={1000}
         recycle={false}
       />
-      <div className="complete">
+      <div className="complete info">
         <span>🎉</span>
         <h2>You did it!</h2>
         <p>Look at you, acing the abjad. Want to give it another go?</p>

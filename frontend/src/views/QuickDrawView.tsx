@@ -19,7 +19,7 @@ export function QuickDrawView() {
   const [isNewPersonalBest, setIsNewPersonalBest] = useState(false);
   const [personalBestStr, setPersonalBestStr] = useLocalStorage(
     PERSONAL_BEST_KEY,
-    ""
+    "",
   );
 
   const personalBest: number | null =
@@ -73,7 +73,7 @@ export function QuickDrawView() {
 function InitialStep({ onStart }: { onStart: () => void }) {
   return (
     <div className="info">
-      <h2>Quick draw</h2>
+      <h2>Quick Draw</h2>
       <p>Write the letters of the Arabic alphabet as fast as you can!</p>
       <p>It's you against the clock. ⏱️</p>
       <Button onClick={onStart}>Yalla, let's do this!</Button>
@@ -91,13 +91,13 @@ function GameStep({
   const [prediction, setPrediction] = useState<number | null>(null);
   const [alreadySeen, setAlreadySeen] = useState<boolean>(false);
   const [seenLetters, setSeenLetters] = useState<boolean[]>(
-    new Array(ARABIC_CHARACTERS_COUNT).fill(false)
+    new Array(ARABIC_CHARACTERS_COUNT).fill(false),
   );
   const [timeElapsed, setTimeElapsed] = useState(0);
 
   useInterval(() => {
     setTimeElapsed(Date.now() - startTime);
-  }, 10);
+  }, 100);
 
   const areAllLettersSeen = seenLetters.every((seen) => seen);
 
@@ -138,7 +138,7 @@ function GameStep({
 
   return (
     <>
-      <p className="stopwatch">{(timeElapsed / 1000).toFixed(2)}</p>
+      <p className="stopwatch">{(timeElapsed / 1000).toFixed(1)}</p>
       <div className="action-area">
         <DrawingArea onSubmit={onSubmit} onClear={onClearCanvas} />
 

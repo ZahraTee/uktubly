@@ -2,552 +2,579 @@
 @import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 :root {
-  font-family: "Pangolin", cursive;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "Pangolin", cursive;
+    line-height: 1.5;
+    font-weight: 500;
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 18px;
 
-  --bg-color: #2a1b35;
-  --button-color: #5d396b;
-  --text-color: #dfe3ff;
-  --shadow-color: #c67ed4;
-  --positive-color: #2c3a2f;
-  --active-color: #934b9f;
+    --bg-color: #2a1b35;
+    --button-color: #5d396b;
+    --text-color: #dfe3ff;
+    --shadow-color: #c67ed4;
+    --positive-color: #2c3a2f;
+    --active-color: #934b9f;
 }
 
 :dir(rtl),
 .ar {
-  font-family: IBM Plex Sans Arabic, system-ui, Avenir, Helvetica, Arial,
-    sans-serif;
+    font-family:
+        IBM Plex Sans Arabic,
+        system-ui,
+        Avenir,
+        Helvetica,
+        Arial,
+        sans-serif;
 }
 
 #root {
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  background-size: 200px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  background-image: url("/shapes-light.svg");
-  background-blend-mode: lighten;
+    margin: 0 auto;
+    padding: 1em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-size: 200px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    background-image: url("/shapes-light.svg");
+    background-blend-mode: lighten;
 }
 
 main {
-  width: 100%;
-  max-width: 1280px;
-  padding: 0 2em;
-  flex: 1;
+    width: 100%;
+    max-width: 980px;
+    padding: 0;
+    flex: 1;
 }
 
 @keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 100;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
 
 .complete {
-  animation: fade-in 3s;
+    animation: fade-in 3s;
 }
 
 .root a {
-  font-weight: 500;
-  color: #222225;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #222225;
+    text-decoration: inherit;
 }
 
 a:hover {
-  color: var(--active-color);
+    color: var(--active-color);
 }
 
 body {
-  margin: 0;
-  place-items: center;
-  min-width: 300px;
-  min-height: 100vh;
+    margin: 0;
+    place-items: center;
+    min-width: 300px;
+    min-height: 100vh;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 450;
-  font-family: inherit;
-  color: var(--text-color);
-  background-color: var(--button-color);
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 450;
+    font-family: inherit;
+    color: var(--text-color);
+    background-color: var(--button-color);
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
 
 button svg {
-  height: 32px;
-  width: 32px;
+    height: 32px;
+    width: 32px;
 }
 
 button:hover {
-  background-color: var(--active-color);
+    background-color: var(--active-color);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 header {
-  width: 100%;
-  height: 6em;
-  padding: 1em 1em;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    height: 4em;
+    display: flex;
+    justify-content: space-between;
 }
 
 header a {
-  display: inline-block;
-  height: 100%;
+    display: inline-block;
+    height: 100%;
 }
 
 header a .logo {
-  color: var(--text-color);
-  height: 100%;
-  width: fit-content;
+    color: var(--text-color);
+    height: 100%;
 }
 
 header a .logo:hover {
-  color: var(--active-color);
+    color: var(--active-color);
 }
 
 menu {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  height: 3em;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 3em;
 }
 
 menu li {
-  display: flex;
-  list-style: none;
-  width: fit-content;
-  height: 100%;
+    display: flex;
+    list-style: none;
+    width: fit-content;
+    height: 100%;
 }
 
 menu li a {
-  text-decoration: none;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  margin: 0 0.25em;
-  border-bottom: 3px solid transparent;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 0.25em;
+    border-bottom: 3px solid transparent;
 }
 
 menu li a.active {
-  border-bottom: 3px solid var(--active-color);
+    border-bottom: 3px solid var(--active-color);
 }
 
 .active .logo {
-  color: var(--active-color);
+    color: var(--active-color);
 }
 
 menu .options {
-  margin: 0 0.25em;
-  display: flex;
+    margin: 0 0.25em;
+    display: flex;
 }
 
 header .options {
-  margin: 0 0.5em;
-  display: flex;
-  height: 100%;
-  align-items: center;
+    margin: 0 0.5em;
+    display: flex;
+    height: 100%;
+    align-items: center;
 }
 
 header .options li {
-  margin: 0 0.25em;
+    margin: 0 0.25em;
 }
 
 header .options button {
-  height: 32px;
-  width: 32px;
-  padding: 0px;
+    height: 32px;
+    width: 32px;
+    padding: 0px;
 }
 
 header h1 {
-  margin: 0.5em;
+    margin: 0.5em;
 }
 
 .canvas {
-  border-radius: 24px;
-  height: 300px;
-  width: 300px;
-  border-bottom: 8px solid var(--shadow-color);
-  max-width: 100%;
-  margin: 0 auto;
+    border-radius: 24px;
+    height: 300px;
+    width: 300px;
+    border-bottom: 8px solid var(--shadow-color);
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .tl-background {
-  border-radius: 16px;
+    border-radius: 16px;
 }
 
 .tl-container__focused {
-  outline: unset;
+    outline: unset;
 }
 
 .toolbar {
-  margin: 1em -0.25em;
+    margin: 1em -0.25em;
 }
 
 .toolbar button {
-  margin: 0 0.25em;
+    margin: 0 0.25em;
 }
 
 .prediction {
-  font-size: 3em;
+    font-size: 3em;
 }
 
 .action-area {
-  display: flex;
-  max-width: 700px;
-  margin: 3em auto;
+    display: flex;
+    max-width: 700px;
+    margin: 3em auto;
 }
 
 .drawing-area {
-  margin-top: 1em;
+    margin-top: 1em;
 }
 
 .results-area {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: auto;
-  flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    flex: 1;
 }
 
 .stopwatch {
-  font-variant-numeric: tabular-nums;
-  font-size: 1.25em;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.25em;
 }
 
 .board {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 0.5em;
-  margin: 2em;
-  justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 0.5em;
+    margin: 2em;
+    justify-content: center;
 
-  height: fit-content;
-  width: fit-content;
-  flex-wrap: wrap;
+    height: fit-content;
+    width: fit-content;
+    flex-wrap: wrap;
 }
 
 .tile {
-  font-size: 1.5em;
-  height: 3ch;
-  width: 3ch;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #1d1d1d;
-  border-radius: 4px;
+    font-size: 1.5em;
+    height: 3ch;
+    width: 3ch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1d1d1d;
+    border-radius: 4px;
 }
 
 @keyframes show-letter {
-  0% {
-    background-color: var(--bg-color);
-    color: transparent;
-  }
-  100% {
-    background-color: var(--positive-color);
-    color: var(--text-color);
-  }
+    0% {
+        background-color: var(--bg-color);
+        color: transparent;
+    }
+    100% {
+        background-color: var(--positive-color);
+        color: var(--text-color);
+    }
 }
 
 .found {
-  background-color: var(--positive-color);
-  animation: show-letter 1s;
+    background-color: var(--positive-color);
+    animation: show-letter 1s;
 }
 
 .hidden-error {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .flex {
-  display: flex;
-  height: fit-content;
-  align-items: center;
-  flex: 0;
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    padding: 0 1em;
 }
 
 .modes {
-  margin: 3em 1em;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: fit-content;
+    margin: 3em 1em;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
 }
 
 .mode {
-  background: var(--button-color);
-  display: flex;
-  border-bottom: 8px solid var(--shadow-color);
-  text-decoration: none;
-  max-width: 520px;
-  width: 100%;
-  text-align: left;
-  border-radius: 32px;
-  margin-bottom: 1.5em;
-  color: var(--text-color);
+    background: var(--button-color);
+    display: flex;
+    border-bottom: 8px solid var(--shadow-color);
+    text-decoration: none;
+    max-width: 520px;
+    width: 100%;
+    text-align: left;
+    border-radius: 32px;
+    margin-bottom: 1.5em;
+    color: var(--text-color);
 }
 
 a.mode:hover {
-  color: var(--text-color);
-  background-color: var(--active-color);
+    color: var(--text-color);
+    background-color: var(--active-color);
 }
 
 .mode .text h2 {
-  margin: 0;
+    margin: 0;
 }
 
 .mode .text p {
-  margin: 0.5em 0 0 0;
+    margin: 0.5em 0 0 0;
 }
 
 .mode .text {
-  display: flex;
-  flex-direction: column;
-  padding: 2em 2em 2em 0;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding: 2em 2em 2em 0;
+    justify-content: center;
 }
 
 .mode .emoji {
-  font-size: 4em;
-  border-radius: 16px;
-  margin: 24px;
-  width: fit-content;
-  justify-content: center;
-  text-shadow: 10px var(--shadow-color);
-  display: flex;
-  align-items: center;
+    font-size: 4em;
+    border-radius: 16px;
+    margin: 24px;
+    width: fit-content;
+    justify-content: center;
+    text-shadow: 10px var(--shadow-color);
+    display: flex;
+    align-items: center;
 }
 
 .intro {
-  height: fit-content;
-  text-wrap: balance;
-  padding: 2em 1em;
-  flex: 1;
+    height: fit-content;
+    text-wrap: balance;
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 400px;
 }
 
 .intro .logo {
-  max-width: 300px;
+    max-width: 300px;
+}
+
+.intro h3 {
+    font-size: 1.25em;
+    margin: 0.5em 0;
+    max-width: 500px;
 }
 
 .info {
-  background-color: #1d1d1d;
-  width: fit-content;
-  padding: 2em;
-  margin: 3em auto 6em;
-  border-radius: 1em;
-  text-wrap: balance;
-  min-width: 480px;
+    background-color: #1d1d1d;
+    width: fit-content;
+    padding: 2em;
+    margin: 3em auto 6em;
+    border-radius: 1em;
+    text-wrap: balance;
+    min-width: 480px;
 }
 
 .info button {
-  margin: 0.5em;
+    margin: 0.5em;
 }
 
 .info h2 {
-  margin-top: 0;
+    margin-top: 0;
+}
+
+p.instruction {
+    font-size: 1.125em;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    --bg-color: #dfe3ff;
-    --button-color: #e6cdef;
-    --text-color: #1d082c;
-    --active-color: #c39bd5;
-    --shadow-color: #1d082c;
-    --positive-color: #ecfdf0;
-  }
+    :root {
+        --bg-color: #dfe3ff;
+        --button-color: #e6cdef;
+        --text-color: #1d082c;
+        --active-color: #c39bd5;
+        --shadow-color: #1d082c;
+        --positive-color: #ecfdf0;
+    }
 
-  #root {
-    font-weight: 425;
-    background-image: url("/shapes-dark.svg");
-    background-blend-mode: darken;
-  }
+    #root {
+        font-weight: 400;
+        background-image: url("/shapes-dark.svg");
+        background-blend-mode: darken;
+    }
 
-  a:hover {
-    color: var(--active-color);
-  }
+    a:hover {
+        color: var(--active-color);
+    }
 
-  button {
-    background-color: var(--button-color);
-    border-bottom: 2px solid var(--shadow-color);
-  }
+    button {
+        background-color: var(--button-color);
+        border-bottom: 2px solid var(--shadow-color);
+    }
 
-  .tile,
-  .info {
-    background-color: #ffffff;
-  }
+    .tile,
+    .info {
+        background-color: #ffffff;
+    }
 }
 
-@media (max-width: 786px) {
-  .canvas {
-    height: 240px;
-    width: 240px;
-  }
+@media (max-width: 960px) {
+    main {
+        max-width: 540px;
+        padding: 1em 0;
+    }
 
-  menu {
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    top: 5em;
-    z-index: 250;
-    flex-direction: column;
-  }
+    .canvas {
+        height: 240px;
+        width: 240px;
+    }
 
-  header.menu-open,
-  .menu-open menu {
-    background-color: var(--bg-color);
-  }
+    menu {
+        width: 100%;
+        height: fit-content;
+        text-align: center;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 5em;
+        z-index: 250;
+        flex-direction: column;
+    }
 
-  menu li {
-    flex-direction: row;
-    width: 100%;
-    height: fit-content;
-  }
+    header.menu-open,
+    .menu-open menu {
+        background-color: var(--bg-color);
+    }
 
-  menu li a {
-    width: 100%;
-    background: none;
-    margin: 0;
-    padding: 0.5em;
-    justify-content: center;
-  }
+    menu li {
+        flex-direction: row;
+        width: 100%;
+        height: fit-content;
+    }
 
-  menu li a:hover {
-    background: var(--active-color);
-    color: var(--text-color);
-  }
+    menu li a {
+        width: 100%;
+        background: none;
+        margin: 0;
+        padding: 0.5em;
+        justify-content: center;
+    }
 
-  menu li a,
-  menu li a.active {
-    border-bottom: none;
-  }
+    menu li a:hover {
+        background: var(--active-color);
+        color: var(--text-color);
+    }
 
-  .action-area {
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-  }
+    menu li a,
+    menu li a.active {
+        border-bottom: none;
+    }
 
-  .toolbar {
-    margin: 1em;
-  }
+    .action-area {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
 
-  .toolbar button {
-    max-width: 20vw;
-  }
+    .toolbar {
+        margin: 1em;
+    }
 
-  .board {
-    margin: 0;
-  }
+    .toolbar button {
+        padding: 0.6em;
+    }
 
-  .tile {
-    font-size: 1.25em;
-  }
+    .board {
+        margin: 0;
+    }
 
-  .flex {
-    flex-direction: column;
-  }
+    .tile {
+        font-size: 1.25em;
+    }
 
-  .mode {
-    margin-bottom: 1em;
-  }
+    .flex {
+        flex-direction: column;
+    }
 
-  .mode h2 {
-    font-size: 1.25em;
-  }
+    .mode {
+        margin-bottom: 1em;
+    }
 
-  .intro {
-    flex: 0;
-    padding: 2em 0 1em 0;
-  }
+    .mode:last-of-type {
+        margin-bottom: 0;
+    }
 
-  .intro .logo {
-    max-height: 100px;
-  }
+    .mode h2 {
+        font-size: 1.25em;
+    }
 
-  .modes {
-    margin: 0;
-  }
+    .intro {
+        flex: 0;
+        padding: 1em 0;
+    }
 
-  .mode .emoji {
-    font-size: 3em;
-    margin: 0.5em;
-  }
+    .intro .logo {
+        max-height: 100px;
+    }
 
-  .mode .text {
-    padding: 1em 2em 1.5em 0;
-  }
+    .modes {
+        margin: 0;
+    }
 
-  .mode .text p {
-    font-size: 0.875em;
-  }
+    .mode .emoji {
+        font-size: 3em;
+        margin: 0.5em;
+    }
 
-  .info {
-    min-width: 300px;
-  }
+    .mode .text {
+        padding: 1em 1em 1em 0;
+    }
+
+    .mode .text p {
+        font-size: 0.875em;
+    }
+
+    .info {
+        min-width: 300px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .found,
-  .complete {
-    animation: none;
-  }
+    .found,
+    .complete {
+        animation: none;
+    }
 }
 
 .sr-only:not(:focus):not(:active) {
-  clip: rect(0 0 0 0);
-  clip-path: inset(100%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
 }
 
 .about {
-  text-align: left;
-  max-width: 65ch;
-  text-wrap: unset;
-  font-weight: 400;
+    text-align: left;
+    max-width: 65ch;
+    text-wrap: unset;
+    font-weight: 400;
 }
 
 .about h2 {
-  font-size: 1.125em;
+    font-size: 1.125em;
 }
 
 details {
-  background: var(--button-color);
-  padding: 1em 1em 0 1em;
+    background: var(--button-color);
+    padding: 1em 1em 0 1em;
 }
 
 details summary {
-  margin-bottom: 1em;
+    margin-bottom: 1em;
 }
